@@ -46,5 +46,20 @@ public class DataHelper {
         return new VerificationCode("0");
     }
 
+    public static void cleanUP() {
+        var countSQL1 = "delete from auth_codes;";
+        var countSQL2 = "delete from cards;";
+        var countSQL3 = "delete from users;";
+        try {
+            var connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
+            var statement = connection.createStatement();
+            statement.executeUpdate(countSQL1);
+            statement.executeUpdate(countSQL2);
+            statement.executeUpdate(countSQL3);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 
 }
